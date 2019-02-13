@@ -3,18 +3,19 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SaveUser extends HttpServlet {
-
-    Connection con; PreparedStatement ps;
+public class VerifyUser extends HttpServlet {
+    
+   Connection con; PreparedStatement ps;
 
     @Override
     public void init(){
-        String sql="insert into users values(?,?,?,?,?,?)";
+        String sql="select uname from users where userid=? and password=?";
         try{
         Class.forName("com.mysql.jdbc.Driver");
         con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
@@ -32,34 +33,51 @@ public class SaveUser extends HttpServlet {
                 
     }
     
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
-        //reads the data
-        String userid=request.getParameter("userid");
-        String password=request.getParameter("password");
-        String uname=request.getParameter("uname");
-        String address=request.getParameter("address");
-        String mobile=request.getParameter("mobile");
-        String email=request.getParameter("email");
-        //process the data
+        //VerifyUser?userid=aaa&password=bbb&utype=Admin
+        String uid=request.getParameter("userid");
+        String pw=request.getParameter("password");
+        String utype=request.getParameter("utype");
         
-        try{
-        ps.setString(1, userid);
-        ps.setString(2, password);
-        ps.setString(3, uname);
-        ps.setString(4, address);
-        ps.setString(5, mobile);
-        ps.setString(6, email);
-        ps.executeUpdate();
-        }catch(Exception e){
-            out.println(e);
-        }
-        //provides the response
-        
-        out.println("Registration Completed");
+        if(utype.equals("Admin")){
+            //admin-check
+            if(uid.equals("admin") && pw.equals("indore")){
+              response.sendRedirect("adminpage.jsp");
+            }else{
+                out.println("Invalid Admin Account");
+            }
+            
+        }else{
+            //buyer-check (users)
+            try{
+                ps.setString(1, uid);
+                ps.setString(2, pw);
+                ResultSet rs=ps.executeQuery();
+                boolean found=rs.next();
+                if(found){
+                    response.sendRedirect("buyerpage.jsp");
+                }else{
+                    out.println("Invalid Buyer Account");
+                }
                 
+            }catch(Exception e){
+                out.println(e);
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
