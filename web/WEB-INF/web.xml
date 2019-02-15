@@ -8,6 +8,14 @@
         <servlet-name>VerifyUser</servlet-name>
         <servlet-class>VerifyUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SaveBook</servlet-name>
+        <servlet-class>SaveBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectServlet</servlet-name>
+        <servlet-class>SubjectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SaveUser</servlet-name>
         <url-pattern>/SaveUser</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>VerifyUser</servlet-name>
         <url-pattern>/VerifyUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveBook</servlet-name>
+        <url-pattern>/SaveBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectServlet</servlet-name>
+        <url-pattern>/SubjectServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
