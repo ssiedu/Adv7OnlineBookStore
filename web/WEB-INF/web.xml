@@ -16,6 +16,14 @@
         <servlet-name>SubjectServlet</servlet-name>
         <servlet-class>SubjectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TitleServlet</servlet-name>
+        <servlet-class>TitleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailServlet</servlet-name>
+        <servlet-class>DetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SaveUser</servlet-name>
         <url-pattern>/SaveUser</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>SubjectServlet</servlet-name>
         <url-pattern>/SubjectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TitleServlet</servlet-name>
+        <url-pattern>/TitleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailServlet</servlet-name>
+        <url-pattern>/DetailServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -9,40 +9,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SubjectServlet extends HttpServlet {
+public class TitleServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();
+        PrintWriter out = response.getWriter();
+        //will show the titles of all the books belongs to
+        //subject clicked by user.
+        String subject=request.getParameter("sub");
+        String sql="select bcode, btitle from books where subject=?";
+
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
-            String sql="select distinct subject from books";
             PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, subject);
             ResultSet rs=ps.executeQuery();
             out.println("<html>");
             out.println("<body>");
-            out.println("<h3>Subject List</h3>");
+            out.println("<h3>Book List</h3>");
             out.println("<hr>");
             while(rs.next()){
-                String s=rs.getString(1);
-                out.println("<a href=TitleServlet?sub="+s+">");
-                out.println(s);
+                String s1=rs.getString(1);
+                String s2=rs.getString(2);
+                out.println("<a href=DetailServlet?code="+s1+">");
+                out.println(s2);
                 out.println("</a>");
                 out.println("<br>");
             }
             out.println("<hr>");
-            out.println("<a href=buyerpage.jsp>BuyerPage</a><br>");
+            out.println("<a href=SubjectServlet>SubjectPage</a><br>");
+            out.println("<a href=buyerpage.jsp>BuyerPage</a>");
             out.println("</body>");
             out.println("</html>");
             con.close();
         }catch(Exception e){
             out.println(e);
         }
-        
-        
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
