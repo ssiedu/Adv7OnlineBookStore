@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,15 @@ public class TitleServlet extends HttpServlet {
         //will show the titles of all the books belongs to
         //subject clicked by user.
         String subject=request.getParameter("sub");
+        //storing the subject name to cookie
+        //just to make it available for other servlets
+        //step-1 (create cookie object)
+        Cookie ck1=new Cookie("choice",subject);
+        //step-2 (set the maximum age of the cookie)
+        ck1.setMaxAge(60*60*24*7);
+        //step-3 ( add the cookie to response object)
+        response.addCookie(ck1);
+        
         String sql="select bcode, btitle from books where subject=?";
 
         try{

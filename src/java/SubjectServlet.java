@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,22 @@ public class SubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
+        String subval="All";
+        //reading the cookie whose name is choice
+        //which was stored by TitleServlet
+        //step-1 (read all the cookies coming with request
+        Cookie c[]=request.getCookies();
+        //step-2 (search for the desired one)
+        //looking for the cookie with a name "choice"
+        
+        for(Cookie ck:c){
+            String name=ck.getName();
+            if(name.equals("choice")){
+                subval=ck.getValue();
+                break;
+            }
+        }
+        
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
@@ -23,6 +40,7 @@ public class SubjectServlet extends HttpServlet {
             ResultSet rs=ps.executeQuery();
             out.println("<html>");
             out.println("<body>");
+            out.println("<marquee><h5>Attractive Offers On "+subval+" Books</h5></marquee>");
             out.println("<h3>Subject List</h3>");
             out.println("<hr>");
             while(rs.next()){
