@@ -1,6 +1,9 @@
+<%
+  String id=(String)session.getAttribute("user");
+%>
 <html>
     <body>
-        <h3>Welcome Buyer</h3>
+        <h3>Welcome <%=id%></h3>
         <hr>
         <pre>
         <a href="SubjectServlet">View-Books</a>

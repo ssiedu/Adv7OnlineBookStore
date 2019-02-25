@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class SubjectServlet extends HttpServlet {
 
@@ -16,6 +17,12 @@ public class SubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out=response.getWriter();
+        
+        //reading the userid from session
+        //step-1 (fetch the session object)
+        HttpSession session=request.getSession();
+        //step-2 (read the data from session)
+        String userid=(String)session.getAttribute("user");
         String subval="All";
         //reading the cookie whose name is choice
         //which was stored by TitleServlet
@@ -41,6 +48,7 @@ public class SubjectServlet extends HttpServlet {
             out.println("<html>");
             out.println("<body>");
             out.println("<marquee><h5>Attractive Offers On "+subval+" Books</h5></marquee>");
+            out.println("<h3>Welcome "+userid+"</h3>");
             out.println("<h3>Subject List</h3>");
             out.println("<hr>");
             while(rs.next()){

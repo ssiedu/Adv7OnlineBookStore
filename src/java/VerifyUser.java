@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class VerifyUser extends HttpServlet {
     
@@ -60,6 +61,11 @@ public class VerifyUser extends HttpServlet {
                 ResultSet rs=ps.executeQuery();
                 boolean found=rs.next();
                 if(found){
+                    //storing the userid to session
+                    //step-1 (fetch the session object created for this user)
+                    HttpSession session=request.getSession();
+                    session.setAttribute("user", uid);
+                    
                     response.sendRedirect("buyerpage.jsp");
                 }else{
                     out.println("Invalid Buyer Account");
