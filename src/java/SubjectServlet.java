@@ -23,6 +23,12 @@ public class SubjectServlet extends HttpServlet {
         HttpSession session=request.getSession();
         //step-2 (read the data from session)
         String userid=(String)session.getAttribute("user");
+        
+        if(userid==null){
+            response.sendRedirect("index.jsp");
+        }
+        
+        
         String subval="All";
         //reading the cookie whose name is choice
         //which was stored by TitleServlet

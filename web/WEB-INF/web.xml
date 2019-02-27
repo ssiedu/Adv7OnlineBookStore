@@ -24,6 +24,10 @@
         <servlet-name>DetailServlet</servlet-name>
         <servlet-class>DetailServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>KillSession</servlet-name>
+        <servlet-class>KillSession</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SaveUser</servlet-name>
         <url-pattern>/SaveUser</url-pattern>
@@ -48,9 +52,13 @@
         <servlet-name>DetailServlet</servlet-name>
         <url-pattern>/DetailServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>KillSession</servlet-name>
+        <url-pattern>/KillSession</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            2
         </session-timeout>
     </session-config>
 </web-app>
