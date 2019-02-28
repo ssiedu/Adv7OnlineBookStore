@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +29,11 @@ public class SubjectServlet extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
         
+        int items=0;
+        HashSet<String> set=(HashSet<String>) session.getAttribute("cart");
+        if(set!=null){
+            items=set.size();
+        }
         
         String subval="All";
         //reading the cookie whose name is choice
@@ -53,7 +59,8 @@ public class SubjectServlet extends HttpServlet {
             ResultSet rs=ps.executeQuery();
             out.println("<html>");
             out.println("<body>");
-            out.println("<marquee><h5>Attractive Offers On "+subval+" Books</h5></marquee>");
+            out.println("<h6>Total Books In Cart "+items+"</h6>");
+            //out.println("<marquee><h5>Attractive Offers On "+subval+" Books</h5></marquee>");
             out.println("<h3>Welcome "+userid+"</h3>");
             out.println("<h3>Subject List</h3>");
             out.println("<hr>");
