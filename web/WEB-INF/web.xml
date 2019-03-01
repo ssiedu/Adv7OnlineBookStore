@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+
+
     <servlet>
         <servlet-name>SaveUser</servlet-name>
         <servlet-class>SaveUser</servlet-class>
@@ -36,6 +41,14 @@
         <servlet-name>DisplayCart</servlet-name>
         <servlet-class>DisplayCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveBook</servlet-name>
+        <servlet-class>RemoveBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveAll</servlet-name>
+        <servlet-class>RemoveAll</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SaveUser</servlet-name>
         <url-pattern>/SaveUser</url-pattern>
@@ -71,6 +84,14 @@
     <servlet-mapping>
         <servlet-name>DisplayCart</servlet-name>
         <url-pattern>/DisplayCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveBook</servlet-name>
+        <url-pattern>/RemoveBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveAll</servlet-name>
+        <url-pattern>/RemoveAll</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
