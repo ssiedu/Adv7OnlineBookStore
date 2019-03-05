@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <context-param>
+        <param-name>driver-name</param-name>
+        <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>connection-url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/booksdata</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>root</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
@@ -12,6 +29,14 @@
     <servlet>
         <servlet-name>VerifyUser</servlet-name>
         <servlet-class>VerifyUser</servlet-class>
+        <init-param>
+            <param-name>admin-id</param-name>
+            <param-value>admin</param-value>
+        </init-param>
+        <init-param>
+            <param-name>admin-password</param-name>
+            <param-value>ssi</param-value>
+        </init-param>
     </servlet>
     <servlet>
         <servlet-name>SaveBook</servlet-name>

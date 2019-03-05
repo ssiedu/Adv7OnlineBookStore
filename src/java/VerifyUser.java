@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +20,13 @@ public class VerifyUser extends HttpServlet {
     public void init(){
         String sql="select uname from users where userid=? and password=?";
         try{
-        Class.forName("com.mysql.jdbc.Driver");
-        con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
+        ServletContext context=getServletContext();
+        String driver=context.getInitParameter("driver-name");
+        String url=context.getInitParameter("connection-url");
+        String uid=context.getInitParameter("username");
+        String pw=context.getInitParameter("password");
+        Class.forName(driver);
+        con=DriverManager.getConnection(url,uid,pw);
         ps=con.prepareStatement(sql);            
             
         }catch(Exception e){}
@@ -46,8 +53,12 @@ public class VerifyUser extends HttpServlet {
         String utype=request.getParameter("utype");
         
         if(utype.equals("Admin")){
+            
+            ServletConfig config=getServletConfig();
+            String validId=config.getInitParameter("admin-id");
+            String validPw=config.getInitParameter("admin-password");
             //admin-check
-            if(uid.equals("admin") && pw.equals("indore")){
+            if(uid.equals(validId) && pw.equals(validPw)){
               response.sendRedirect("adminpage.jsp");
             }else{
                 out.println("Invalid Admin Account");
