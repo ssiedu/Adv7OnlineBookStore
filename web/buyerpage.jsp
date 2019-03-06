@@ -18,6 +18,7 @@
         <hr>
         <pre>
         <a href="SubjectServlet">View-Books</a>
+        <a href="searchbyid.jsp">Search-Book-By-Id</a>
         <a href="">Search-By-Title</a>
         <a href="">Search-By-Author</a>
         <a href="DisplayCart">View-Cart</a>
