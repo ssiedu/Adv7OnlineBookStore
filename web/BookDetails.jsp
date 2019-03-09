@@ -1,3 +1,16 @@
+<%!
+    int highDis=20;
+    int lowDis=10;
+int getDiscount(int pr){
+        int dis=0;
+        if(pr>=1000){
+            dis=pr*lowDis/100;
+        }else{
+            dis=pr*highDis/100;
+        }
+        return dis;
+    }
+%>
 <%
     int code=Integer.parseInt(request.getParameter("code"));
     Class.forName("com.mysql.jdbc.Driver");
@@ -21,23 +34,27 @@
             <tbody>
                 <tr>
                     <td>BCode</td>
-                    <td><% out.print(bcode); %></td>
+                    <td><%=bcode%></td>
                 </tr>
                 <tr>
                     <td>Title</td>
-                    <td><% out.println(title);%></td>
+                    <td><%=title%></td>
                 </tr>
                 <tr>
                     <td>Author</td>
-                    <td><% out.println(author);%></td>
+                    <td><%=author%></td>
                 </tr>
                 <tr>
                     <td>Subject</td>
-                    <td><% out.println(subject);%></td>
+                    <td><%=subject%></td>
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td><% out.println(price);%></td>
+                    <td><%=price%></td>
+                </tr>
+                <tr>
+                    <td>Disc</td>
+                    <td><%=getDiscount(Integer.parseInt(price))%></td>
                 </tr>
             </tbody>
         </table>
