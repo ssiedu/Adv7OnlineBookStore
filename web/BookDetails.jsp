@@ -1,3 +1,7 @@
+<%@page isELIgnored="true" errorPage="myerrorpage.jsp" session="true" isThreadSafe="true"  contentType="text/html" language="java" import="java.sql.*" %>
+
+
+<%@include file="info.jsp" %>
 <%!
     int highDis=20;
     int lowDis=10;
@@ -14,9 +18,9 @@ int getDiscount(int pr){
 <%
     int code=Integer.parseInt(request.getParameter("code"));
     Class.forName("com.mysql.jdbc.Driver");
-    java.sql.Connection con=java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
+    Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/booksdata","root","root");
     String sql="select * from books where bcode=?";
-    java.sql.PreparedStatement ps=con.prepareStatement(sql);
+    PreparedStatement ps=con.prepareStatement(sql);
     ps.setInt(1, code);
     java.sql.ResultSet rs=ps.executeQuery();
     rs.next();
@@ -28,6 +32,7 @@ int getDiscount(int pr){
 %>
 <html>
     <body>
+        <h3>Welcome <%=session.getAttribute("user")%></h3>
         <h3>Book-Details</h3>
         <hr>
         <table border="2" width="2" cellspacing="2" cellpadding="2">

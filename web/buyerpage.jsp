@@ -1,3 +1,4 @@
+<%@include file="info.jsp" %>
 <%
   long val=session.getCreationTime();
   java.util.Date dt=new java.util.Date(val);
@@ -17,6 +18,7 @@
         --%>
         <hr>
         <pre>
+        <a href="PriceInfo.jsp">View-Price-List</a>
         <a href="SubjectServlet">View-Books</a>
         <a href="searchbyid.jsp">Search-Book-By-Id</a>
         <a href="">Search-By-Title</a>

@@ -1,3 +1,4 @@
+<%@include file="info.jsp" %>
 <html>
     <body>
         <h3>Searching-Form</h3>
